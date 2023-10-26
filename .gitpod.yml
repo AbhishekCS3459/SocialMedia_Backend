@@ -1,37 +1,37 @@
-# Define a custom Docker image for Gitpod (if needed)
-image:
-  file: .gitpod.Dockerfile
+# # Define a custom Docker image for Gitpod (if needed)
+# image:
+#   file: .gitpod.Dockerfile
 
-# Configure Visual Studio Code extensions
-vscode:
-  extensions:
-    - dbaeumer.vscode-eslint
-    - esbenp.prettier-vscode
+# # Configure Visual Studio Code extensions
+# vscode:
+#   extensions:
+#     - dbaeumer.vscode-eslint
+#     - esbenp.prettier-vscode
 
-# Define tasks to be executed when the workspace starts
-tasks:
-  - name: Install Dependencies
-    command: npm install
-    init: true
-  - name: Start PostgreSQL with Docker Compose
-    command: docker-compose up -d
-    init: true
-  - name: Start the Application
-    command: npm start
-    init: true
+# # Define tasks to be executed when the workspace starts
+# tasks:
+#   - name: Install Dependencies
+#     command: npm install
+#     init: true
+#   - name: Start PostgreSQL with Docker Compose
+#     command: docker-compose up -d
+#     init: true
+#   - name: Start the Application
+#     command: npm start
+#     init: true
 
-# Expose ports and specify behavior when they open
-ports:
-  - port: 4000
-    onOpen: open-preview
-  - port: 5432
-    onOpen: ignore
-  - port: 6379
-    onOpen: ignore
-  - port: 8001
-    onOpen: ignore
+# # Expose ports and specify behavior when they open
+# ports:
+#   - port: 4000
+#     onOpen: open-preview
+#   - port: 5432
+#     onOpen: ignore
+#   - port: 6379
+#     onOpen: ignore
+#   - port: 8001
+#     onOpen: ignore
 
-# Define environment variables from your .env file
-env:
-  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
-  PORT: 8000
+# # Define environment variables from your .env file
+# env:
+#   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
+#   PORT: 8000
