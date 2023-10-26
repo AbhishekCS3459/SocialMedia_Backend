@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+
+
+
+
+
+
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// // .env
+// DATABASE_URL=postgres://abhishekverman3459:xauk7IKbCML5@ep-flat-voice-94497487-pooler.ap-southeast-1.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10
+// DIRECT_URL=postgres://abhishekverman3459:xauk7IKbCML5@ep-flat-voice-94497487.ap-southeast-1.aws.neon.tech/neondb?connect_timeout=10
+// # SHADOW_DATABASE_URL=...
+
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url  	= env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  // If you want to use Prisma Migrate, you will need to manually create a shadow database
+  // https://neon.tech/docs/guides/prisma-migrate#configure-a-shadow-database-for-prisma-migrate
+  // make sure to append ?connect_timeout=10 to the connection string
+  // shadowDatabaseUrl = env(“SHADOW_DATABASE_URL”)
+}
+
+
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+
+model User {
+  id              String  @id @default(uuid())
+  firstName       String  @map("first_name")
+  lastName        String? @map("last_name")
+  email           String  @unique
+  password        String
+  salt            String
+  profileImageURL String? @map("profile_image_url")
+  posts           Post?
+
+  @@map("users")
+}
+
+model Post {
+  id         String     @id @default(uuid())
+  title      String
+  content    String
+  postImages PostImage?
+  published  Boolean    @default(false)
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   String     @unique
+}
+
+model PostImage {
+  id     String @id @default(uuid())
+  url    String
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String @unique
+}
