@@ -8,7 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const graphql_1 = __importDefault(require("./graphql"));
 const User_1 = __importDefault(require("./services/User"));
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 async function startApolloServer() {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)());
@@ -25,8 +25,11 @@ async function startApolloServer() {
             catch (e) {
                 return {};
             }
-        }
+        },
     }));
+    app.get("/", (req, res) => {
+        res.send("Working app");
+    });
     app.listen(PORT, () => {
         console.log(`graphql is running on port http://localhost:${PORT}/graphql`);
     });

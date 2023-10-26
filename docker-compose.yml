@@ -1,13 +1,39 @@
 version: '3.1'
+
 services:
-   postgres:
-      container_name: postgrestest
-      image: postgres
-      environment:
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_USER: postgres
-        POSTGRES_DB: postgres
-      ports:
-        - 5432:5432
-      volumes:
-        - ./postgres-data:/var/lib/postgresql/data
+  postgres:
+    container_name: postgrestest
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - GraphQLNetwork
+
+  # The redis-stack-server is not needed for the test, it's only for production
+  # redis-stack-server:
+  #   image: redis/redis-stack-server:latest
+  #   container_name: redis-stack-server
+  #   ports:
+  #     - "6381:6381"
+  #   restart: always
+
+  # This redis-stack is for both UI and Redis
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    restart: always
+    networks:
+      - GraphQLNetwork
+
+networks:
+  GraphQLNetwork:
+    driver: bridge
