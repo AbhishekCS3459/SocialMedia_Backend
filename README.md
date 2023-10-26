@@ -21,7 +21,7 @@ Before getting started, ensure you have the following software installed on your
 
 You can also run this project in a Gitpod workspace, which provides a development environment in the cloud. Click the link below to open this repository in a Gitpod workspace:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/your-username/GraphQLTest)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/your-username/GraphQl_Nodejs_Backend)
 
 ### 1. Clone the Repository
 
