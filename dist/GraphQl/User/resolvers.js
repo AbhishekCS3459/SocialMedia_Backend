@@ -35,7 +35,7 @@ const queries = {
             }
             const user = await User_1.default.getUserById(id);
             // Cache the user data with an expiration (e.g., 3600 seconds)
-            await RedisClient_1.default.setex(`userData:${id}`, 3600, JSON.stringify(user));
+            await RedisClient_1.default.setex(`userData:${id}`, 86400, JSON.stringify(user));
             return user;
         }
         throw new Error("User not found");
