@@ -29,11 +29,7 @@ const queries = {
       const id = context.user.id;
       // Check if the user data is already in the cache
       const cachedUserData = await RedisClient.get(`userData:${id}`);
-<<<<<<< HEAD
-       console.log(cachedUserData);
-=======
     
->>>>>>> bb253cbe48da54ed90e2171a76d2e05a2416e6bf
       if (cachedUserData) {
         return JSON.parse(cachedUserData);
       }

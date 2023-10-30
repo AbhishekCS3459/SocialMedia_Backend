@@ -21,4 +21,4 @@ RUN npx prisma generate
 # Expose a port (if your application listens on a specific port)
 EXPOSE 8000
 # Define the command to run your Node.js application using an entry point script
-CMD ["sh", "-c","npm run start:production"]
+CMD ["sh", "-c","yarn start:production"]
