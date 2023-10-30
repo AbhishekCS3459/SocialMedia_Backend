@@ -8,7 +8,8 @@
     "start": " node dist/index.js",
     "dev": "tsc-watch --onSuccess \"npm start\"",
     "start:production": " node dist/index.js",
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "test": "node dist/tests/index.js"
   },
   "dependencies": {
     "@apollo/server": "^4.9.4",
