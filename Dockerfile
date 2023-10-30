@@ -15,7 +15,7 @@ COPY . .
 
 RUN yarn build
 
-# RUN apt-get update -y && apt-get install -y openssl
+RUN apt-get update -y && apt-get install -y openssl
 RUN npx prisma generate
 
 # Expose a port (if your application listens on a specific port)
