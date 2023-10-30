@@ -1,6 +1,6 @@
 # Use an official Node.js runtime as a parent image
-FROM node:slim
-ENV NODE_ENV=production
+FROM node:20.9.0-slim
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -15,10 +15,8 @@ COPY . .
 
 RUN yarn build
 
-
-# Set environment variables
-ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
-
+RUN apt-get update -y && apt-get install -y openssl
+RUN npx prisma generate
 
 # Expose a port (if your application listens on a specific port)
 EXPOSE 8000

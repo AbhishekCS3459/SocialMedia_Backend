@@ -1,9 +1,11 @@
 version: '3.1'
 
 services:
+#postgres service
   postgres:
-    container_name: postgrestest
+    container_name: DB
     image: postgres
+    restart: always
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
@@ -14,15 +16,47 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
       - GraphQLNetwork
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  # This redis-stack is for both UI and Redis
+# redis service 
   redis-stack:
     image: redis/redis-stack:latest
-    container_name: redis-stack
+    container_name: RedisCaching
     ports:
       - "6379:6379"
       - "8001:8001"
     restart: always
+    networks:
+      - GraphQLNetwork
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  graphqlNodeApp:
+    container_name: graphqlNode
+    image: abhishek3459/threads_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app-data:/var/lib/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis-stack:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=development
+      - PORT=8000
+      - REDIS_HOST=redis-12361.c114.us-east-1-4.ec2.cloud.redislabs.com
+      - REDIS_PORT=12361
+      - REDIS_PASSWORD=AbEZbxWbrNgKwIbeym8U9Yg8YaDpYIrN
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/postgres?schema=public
     networks:
       - GraphQLNetwork
 

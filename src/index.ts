@@ -4,6 +4,7 @@ import express from "express";
 import createGQLServer from "./graphql";
 import UserService from "./services/User";
 import RedisClient from "./Redis/RedisClient";
+import { prismaClient } from "./lib/db";
 const PORT = process.env.PORT;
 
 async function startApolloServer() {
@@ -11,6 +12,11 @@ async function startApolloServer() {
   app.use(cors());
 
   app.use(express.json());
+
+  prismaClient
+    .$connect()
+    .then(() => console.log("Prisma Client Connected"))
+    .catch((e) => console.log("Prisma Client Connection Error", e));
 
   RedisClient.on("connect", () => console.log("Redis Client Connected"));
 
