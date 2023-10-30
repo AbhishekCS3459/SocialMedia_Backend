@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14-slim
+FROM alpine
+RUN apk add --update nodejs npm
 
 # Set the working directory in the container
 WORKDIR /app
