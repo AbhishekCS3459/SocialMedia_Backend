@@ -1,9 +1,10 @@
-# Use an official Node.js runtime as a parent image
-FROM node:20.9.0-slim
+FROM alpine
+RUN apk add --update nodejs npm
 
 # Set the working directory in the container
 WORKDIR /app
-
+# Install Yarn (if not already installed)
+RUN npm install -g yarn
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
@@ -15,8 +16,6 @@ COPY . .
 
 RUN yarn build
 
-RUN apt-get update -y && apt-get install -y openssl
-RUN npx prisma generate
 
 # Expose a port (if your application listens on a specific port)
 EXPOSE 8000
