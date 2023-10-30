@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import createGQLServer from "./graphql";
 import UserService from "./services/User";
+import RedisClient from "./Redis/RedisClient";
 const PORT = process.env.PORT;
 
 async function startApolloServer() {
@@ -10,6 +11,10 @@ async function startApolloServer() {
   app.use(cors());
 
   app.use(express.json());
+
+  RedisClient.on("connect", () => console.log("Redis Client Connected"));
+
+  RedisClient.on("error", (err) => console.log("Redis Client Error", err));
 
   const server = await createGQLServer();
 

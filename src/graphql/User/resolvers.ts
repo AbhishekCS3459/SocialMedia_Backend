@@ -7,6 +7,7 @@ const queries = {
   getUserToken: async (_: any, payload: GetUserTokenPayload) => {
     try {
       const cachedToken = await RedisClient.get(`userToken:${payload.email}`);
+    
       if (cachedToken) {
         return cachedToken;
       }
@@ -28,7 +29,7 @@ const queries = {
       const id = context.user.id;
       // Check if the user data is already in the cache
       const cachedUserData = await RedisClient.get(`userData:${id}`);
-
+    
       if (cachedUserData) {
         return JSON.parse(cachedUserData);
       }
@@ -36,7 +37,7 @@ const queries = {
       const user = await UserService.getUserById(id);
 
       // Cache the user data with an expiration (e.g., 3600 seconds)
-      await RedisClient.setex(`userData:${id}`, 3600, JSON.stringify(user));
+      await RedisClient.setex(`userData:${id}`, 86400, JSON.stringify(user));
 
       return user;
     }

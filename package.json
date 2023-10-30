@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-
+    "dx": "docker-compose up -d",
     "start": " node dist/index.js",
-    "dev": "tsc-watch --onSuccess \"npm start\""
+    "dev": "tsc-watch --onSuccess \"npm start\"",
+    "start:production": " node dist/index.js",
+    "build": "tsc -b"
   },
   "dependencies": {
     "@apollo/server": "^4.9.4",
