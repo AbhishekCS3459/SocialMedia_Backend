@@ -15,14 +15,6 @@ services:
     networks:
       - GraphQLNetwork
 
-  # The redis-stack-server is not needed for the test, it's only for production
-  # redis-stack-server:
-  #   image: redis/redis-stack-server:latest
-  #   container_name: redis-stack-server
-  #   ports:
-  #     - "6381:6381"
-  #   restart: always
-
   # This redis-stack is for both UI and Redis
   redis-stack:
     image: redis/redis-stack:latest
