@@ -1,4 +1,7 @@
 # Social Media Backend Build Using Graphql,Redis etc.
+### Overview of the Application
+![image](https://github.com/AbhishekCS3459/SocialMedia_Backend/assets/94506000/fe9e1bd1-0e22-48bb-b6fb-c4efe527e044)
+
 
 This is the README file for the **Social Media Backend** project, which includes a Docker Compose configuration and a Node.js application. The project utilizes Docker to set up a PostgreSQL database and a Redis server for development purposes. Additionally, it is built with TypeScript and utilizes popular GraphQL and Prisma libraries to create a GraphQL API server.
 
