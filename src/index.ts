@@ -40,7 +40,7 @@ async function startApolloServer() {
     })
   );
 
-  app.get("/", (req, res) => {
+  app.get("/healthcheck", (req, res) => {
     res.send("Working app");
   });
 
