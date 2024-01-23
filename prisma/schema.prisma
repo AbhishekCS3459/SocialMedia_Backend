@@ -6,11 +6,6 @@ generator client {
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
-// // .env
-// DATABASE_URL=postgres://abhishekverman3459:xauk7IKbCML5@ep-flat-voice-94497487-pooler.ap-southeast-1.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10
-// DIRECT_URL=postgres://abhishekverman3459:xauk7IKbCML5@ep-flat-voice-94497487.ap-southeast-1.aws.neon.tech/neondb?connect_timeout=10
-// # SHADOW_DATABASE_URL=...
-
 // prisma/schema.prisma
 datasource db {
   provider = "postgresql"
