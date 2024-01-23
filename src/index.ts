@@ -25,7 +25,7 @@ async function startApolloServer() {
   const server = await createGQLServer();
 
   app.use(
-    "/graphql",
+    "/",
     expressMiddleware(server, {
       context: async ({ req }) => {
         const token = req.headers["token"];
